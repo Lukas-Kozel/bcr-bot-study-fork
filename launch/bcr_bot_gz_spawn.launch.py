@@ -21,6 +21,7 @@ def generate_launch_description():
     bcr_bot_path = get_package_share_directory("bcr_bot")
     position_x = LaunchConfiguration("position_x")
     position_y = LaunchConfiguration("position_y")
+    position_z = LaunchConfiguration("position_z")
     orientation_yaw = LaunchConfiguration("orientation_yaw")
     camera_enabled = LaunchConfiguration("camera_enabled", default=True)
     stereo_camera_enabled = LaunchConfiguration("stereo_camera_enabled", default=False)
@@ -61,7 +62,7 @@ def generate_launch_description():
             "-topic", "/robot_description",
             "-name", "bcr_bot",
             "-allow_renaming", "true",
-            "-z", "0.28",
+            "-z", position_z,
             "-x", position_x,
             "-y", position_y,
             "-Y", orientation_yaw
@@ -85,6 +86,7 @@ def generate_launch_description():
             "stereo_camera/right/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
             "/kinect_camera/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked",
             "/imu@sensor_msgs/msg/Imu[gz.msgs.IMU",
+            "/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat",
             "/world/default/model/bcr_bot/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model"
         ],
         remappings=[
@@ -95,6 +97,7 @@ def generate_launch_description():
             ('/stereo_camera/left/image_raw', 'bcr_bot/stereo_camera/left/image_raw'),
             ('/stereo_camera/right/image_raw', 'bcr_bot/stereo_camera/right/image_raw'),
             ('/imu', 'bcr_bot/imu'),
+            ('/gps/fix', 'bcr_bot/gps/fix'),
             ('/cmd_vel', 'bcr_bot/cmd_vel'),
             ('kinect_camera/camera_info', 'bcr_bot/kinect_camera/camera_info'),
             ('stereo_camera/left/camera_info', 'bcr_bot/stereo_camera/left/camera_info'),
@@ -122,6 +125,7 @@ def generate_launch_description():
         DeclareLaunchArgument("two_d_lidar_enabled", default_value = two_d_lidar_enabled),
         DeclareLaunchArgument("position_x", default_value="0.0"),
         DeclareLaunchArgument("position_y", default_value="0.0"),
+        DeclareLaunchArgument("position_z", default_value="0.28"),
         DeclareLaunchArgument("orientation_yaw", default_value="0.0"),
         DeclareLaunchArgument("odometry_source", default_value="world"),
         robot_state_publisher,

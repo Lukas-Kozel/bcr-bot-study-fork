@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.6">
+  <world name="default">
+
+
+    <!-- Reálné souřadnice okruhu Sonoma Raceway, Kalifornie -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>38.161479</latitude_deg>
+      <longitude_deg>-122.454630</longitude_deg>
+      <elevation>15.0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+
+    <!-- Osvětlení (Slunce) -->
+    <light type="directional" name="sun">
+        <cast_shadows>true</cast_shadows>
+        <pose>0 0 10 0 0 0</pose>
+        <diffuse>0.8 0.8 0.8 1</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+        <attenuation>
+            <range>1000</range>
+            <constant>0.9</constant>
+            <linear>0.01</linear>
+            <quadratic>0.001</quadratic>
+        </attenuation>
+        <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <include>
+        <uri>model://sonoma_raceway</uri>
+        <pose>0 0 -4.8 0 0 0</pose> 
+    </include>
+
+    <!-- Záchranná placka pro případ, že by auto sjelo z tratě -->
+    <model name="ground_plane">
+        <static>true</static>
+        <link name="link">
+            <collision name="collision">
+                <geometry>
+                    <plane>
+                        <normal>0 0 1</normal>
+                    </plane>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <plane>
+                        <normal>0 0 1</normal>
+                        <size>2000 2000</size>
+                    </plane>
+                </geometry>
+                <material>
+                    <ambient>0.2 0.5 0.2 1</ambient> <!-- Zelená tráva -->
+                    <diffuse>0.2 0.5 0.2 1</diffuse>
+                </material>
+            </visual>
+        </link>
+    </model>
+
+  </world>
+</sdf>

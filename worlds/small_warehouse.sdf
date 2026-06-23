@@ -1,6 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <sdf version="1.6">
   <world name="default">
+        <!-- Crucial for GPS -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>50.087811</latitude_deg>
+      <longitude_deg>14.420460</longitude_deg>
+      <elevation>235.0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
 
     
     <model name="aws_robomaker_warehouse_RoofB_01_001">
